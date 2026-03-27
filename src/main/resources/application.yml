@@ -1,0 +1,57 @@
+server:
+  port: 9090
+
+spring:
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    templete:
+      default-topic: tacocloud.orders.topic
+  data:
+    rest:
+      base-path: /data-api
+  profiles: prod
+  rabbitmq:
+    template:
+      exchange: tacocloud.order
+      routing-key: kitchens.central
+    host: rabbit.tacocloud.com
+    port: 5673
+    username: tacoweb
+    password: l3tm31n
+
+
+  datasource:
+    generate-unique-name: false
+    name: tacocloud
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwt-set-uri: http://localhost:9000/oauth2/jwks
+      client:
+        registration:
+          taco-admin-client:
+            provider: tacocloud
+            client-id: taco-admin-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:9090/login/oauth2/code/{registrationId}"
+            scope: writeIngredients, deletaIngredients, openId
+          facebook:
+            clientId: <facebook client id>
+            clientSecret: <facebook client secret>
+            scope: email, public_profile
+        provider:
+          tacocloud:
+            issuer-uri: http://autheserver:9090
+            authorization-uri: http://authserver:9000/oauth2/authorize
+            token-uri: http://authserver:9000/oauth2/token
+            jwk-set-uri: http://authserver:9000/oauth2/jwks
+            user-info-uri: http://authserver:9000/userinfo
+            user-name-attribute: sub
+  mongodb:
+    database: tacocloud
+    port: 27017
+    host: localhost

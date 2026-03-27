@@ -1,0 +1,8 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: taco-mongo
+    ports:
+      - "27017:27017" # Порт по умолчанию для MongoDB [1, 3]
+    environment:
+      - MONGO_INITDB_DATABASE=tacocloud # Имя БД по умолчанию [4]

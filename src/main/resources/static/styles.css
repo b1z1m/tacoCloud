@@ -1,0 +1,17 @@
+.validationError {
+    color: red;
+}
+.header-container {
+    text-align: left;
+    position: relative;
+    color: white;
+}
+.header-container .header-bar  {
+    position: absolute;
+    right: 10px;
+}
+
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
