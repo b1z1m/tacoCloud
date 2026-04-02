@@ -2,6 +2,8 @@ server:
   port: 9090
 
 spring:
+  main:
+    web-application-type: none
   kafka:
     bootstrap-servers:
       - localhost:9092
@@ -19,7 +21,15 @@ spring:
     port: 5673
     username: tacoweb
     password: l3tm31n
-
+  tacocloud:
+    api:
+      url: http://localhost:8080/orders/fromEmail
+    email:
+      host: imsp.tacocloud.com
+      mailbox: INBOX
+      username: taco-in-flow
+      password: 1L0v3T4c0s
+      poll-rate: 10000
 
   datasource:
     generate-unique-name: false
